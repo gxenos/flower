@@ -131,9 +131,9 @@ clientapp = "fedsim.client_app:app"
 
 # Custom config values accessible via `context.run_config`
 [tool.flwr.app.config]
-num-server-rounds = 3
-fraction-fit = 0.5
-local-epochs = 1
+num-server-rounds = 25
+fraction-fit = 0.1
+local-epochs = 20
 
 # Default federation to use when running the app
 [tool.flwr.federations]
@@ -141,6 +141,6 @@ default = "local-simulation"
 
 # Local simulation federation with 10 virtual SuperNodes
 [tool.flwr.federations.local-simulation]
-options.num-supernodes = 10
+options.num-supernodes = 200
 options.backend.client-resources.num-cpus = 2
 options.backend.client-resources.num-gpus = 0.0

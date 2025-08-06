@@ -4,8 +4,8 @@ import torch
 from flwr.client import ClientApp, NumPyClient
 from flwr.common import Context
 
-from fedsim.dataset import load_data
-from fedsim.model import Net, get_weights, set_weights, test, train
+from fedsim.dataset import load_data_femnist
+from fedsim.model import FEMNIST_MLR_Net, get_weights, set_weights, test, train
 
 
 class FlowerClient(NumPyClient):
@@ -44,10 +44,10 @@ class FlowerClient(NumPyClient):
 def client_fn(context: Context):
     """Construct a Client that will be run in a ClientApp."""
     # Load model and data
-    net = Net()
+    net = FEMNIST_MLR_Net()
     partition_id = int(context.node_config["partition-id"])
     num_partitions = int(context.node_config["num-partitions"])
-    trainloader, valloader = load_data(partition_id, num_partitions)
+    trainloader, valloader = load_data_femnist(partition_id, num_partitions)
     local_epochs = context.run_config["local-epochs"]
 
     # Return Client instance

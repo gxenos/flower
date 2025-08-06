@@ -4,7 +4,7 @@ from flwr.common import Context, Metrics, ndarrays_to_parameters
 from flwr.server import ServerApp, ServerAppComponents, ServerConfig
 from flwr.server.strategy import FedAvg
 
-from fedsim.model import Net, get_weights
+from fedsim.model import FEMNIST_MLR_Net, get_weights
 
 
 # Define metric aggregation function
@@ -25,7 +25,7 @@ def server_fn(context: Context):
     fraction_fit = context.run_config["fraction-fit"]
 
     # Initialize model parameters
-    ndarrays = get_weights(Net())
+    ndarrays = get_weights(FEMNIST_MLR_Net())
     parameters = ndarrays_to_parameters(ndarrays)
 
     # Define strategy
